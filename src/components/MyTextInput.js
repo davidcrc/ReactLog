@@ -8,9 +8,9 @@ export default function MyTextInput(props){
     return (
       <Input
         style={{alignItems: 'center'}}
-        containerStyle={{marginBottom:20,borderBottomColor: color.LIGHTPRIMARYCOLOR, borderBottomWidth: 0}}
-        inputStyle={{ fontSize:18,paddingVertical: 10,
-            paddingHorizontal:8, marginTop:12,
+        containerStyle={{marginBottom:15,borderBottomColor: color.LIGHTPRIMARYCOLOR, borderBottomWidth: 0}}
+        inputStyle={{ fontSize:16,paddingVertical: 10,
+            paddingHorizontal:8, marginTop:10,
             color: color.PRIMARYCOLOR,
             fontFamily:"Poppins-Light",}}
         placeholderTextColor={color.LIGHTPRIMARYCOLOR}

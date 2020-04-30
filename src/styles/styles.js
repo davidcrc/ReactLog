@@ -1,6 +1,62 @@
 import { StyleSheet } from 'react-native'
 import color from './Colors'
 
+//Estilos para MainScreen
+const mainStyles = StyleSheet.create({
+
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: color.WHITE
+    },
+
+    containerCenter: {
+        paddingTop: 10,
+        alignItems: 'center',
+        marginBottom: 25,
+    },
+
+    titleText: {
+        fontSize: 28,
+        marginTop: 10,
+        color: color.BLUE,
+        fontFamily: "Poppins-SemiBold"
+    },
+
+    btnMain: {
+        width: 250,
+        marginTop: 20,
+        marginBottom: 20,
+        alignItems: 'center',
+        backgroundColor: color.BLUE,
+        borderRadius: 60
+    },
+
+    btnTransparent: {
+        backgroundColor: 'rgba(52, 52, 52, 0)',
+        borderColor: color.BLUE,
+        width: 250,
+        borderWidth: 2,
+        marginBottom: 20,
+        borderRadius: 60
+    },
+
+    btntxt: {
+        textAlign: 'center',
+        fontSize: 15,
+        color: color.WHITE,
+        paddingVertical: 10,
+        fontFamily: 'Poppins-Bold',
+    },
+
+    txtTransparent: {
+        color: color.LIGHTPRIMARYCOLOR,
+        fontSize: 14,
+        fontFamily: 'Poppins-Light',
+    }
+    
+})
+
 //Estilos para SplashScreen
 const splashStyles = StyleSheet.create({
     image: {
@@ -15,46 +71,10 @@ const splashStyles = StyleSheet.create({
 //Estilos para LoginScreen
 const loginStyles = StyleSheet.create({
 
-    container: {
-        flex: 1,
-        alignItems: 'center',
-    },
-
     logo: {
         paddingTop: 50,
         alignItems: 'center',
     },
-
-    btnMain: {
-        width: 280,
-        marginTop:40,
-        marginBottom: 20,
-        backgroundColor: color.BLUE,
-        borderRadius: 60
-    },
-
-    btnTransparent: {
-        backgroundColor: 'rgba(52, 52, 52, 0)',
-        borderColor: color.BLUE,
-        width: 280,
-        borderWidth: 2,
-        marginBottom: 20,
-        borderRadius: 60
-    },
-
-    btntxt: {
-        textAlign: 'center',
-        fontSize: 17,
-        color: color.WHITE,
-        paddingVertical: 15,
-        fontFamily: 'Poppins-Bold',
-    },
-
-    txtTransparent: {
-        color: color.LIGHTPRIMARYCOLOR,
-        fontSize: 14,
-        fontFamily: 'Poppins-Light',
-    }
 })
 
-export { loginStyles, splashStyles }
+export { mainStyles, splashStyles, loginStyles }
