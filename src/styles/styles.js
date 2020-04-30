@@ -64,7 +64,7 @@ const splashStyles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: color.WHITE,
+        backgroundColor: color.SPLASH,
     }
 })
 

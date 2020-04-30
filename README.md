@@ -62,3 +62,28 @@
 al final realizar un link al proyecto
 
 npx react-native link
+
+
+# Dependencia para las rutas :
+
+	npm install babel-plugin-module-resolver --save-dev
+
+	- Configurar el archivo babel-config.js :
+
+		plugins: [
+		[
+			"module-resolver", {
+				"alias": {
+				"@components": "./src/components",
+				"@context": "./src/context",
+				"@navigation": "./src/navigation",
+				"@recursos": "./src/recursos",
+				"@screens": "./src/screens",
+				"@storage": "./src/storage",
+				"@styles": "./src/styles",
+				}
+			}
+			]
+		]
+
+	npx react-native start --reset-cache
