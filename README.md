@@ -30,8 +30,9 @@
 	npm install --save react-navigation
 	npm install --save react-navigation-stack
 
-- Necesarias para el splash
+- Animacion pulsante
 	npm install --save react-native-animatable
+	
 	npm install --save react-native-gesture-handler
 	npm install --save react-native-safe-area-context
 	npm install --save react-native-safe-area-view
@@ -55,6 +56,9 @@
 - ...
 	npm install --save react-navigation-stack
 
+- 
+	npm install --save react-native-screens
+	
 al final realizar un link al proyecto
 
 npx react-native link
