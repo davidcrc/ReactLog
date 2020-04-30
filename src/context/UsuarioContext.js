@@ -24,11 +24,12 @@ const usuarioReducer = (state = initialState, payload) => {
 
         // Usuario se va a loguear
         case 'sign':
+            // Aqui deberia colocar el API para saber si se pudo loguear o not
             saveUsuario(payload.data).then((msg) =>  {
                 console.log('usuario guardado')
             })
             Snackbar.show({
-                title: 'Inicio de sesion exitoso',
+                text: 'Inicio de sesion exitoso',
                 duration: Snackbar.LENGTH_LONG
             })
             return { ...state, usuario: payload.data, activo: true }
@@ -36,10 +37,10 @@ const usuarioReducer = (state = initialState, payload) => {
         // Usuario cierra sesion
         case 'sign-out':
             deleteUsuario().then((msg) =>  {
-                console.log('usuario eliminado')
+                console.log(msg)
             })
             Snackbar.show({
-                title: 'Sesión expirada',
+                text: 'Sesión expirada',
                 duration: Snackbar.LENGTH_LONG
             })
             return { ...state, usuario: payload.data, activo: false }
