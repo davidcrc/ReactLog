@@ -9,7 +9,8 @@ const initialState = {
         apellido: '',
         email: '',
         password: ''
-    },activo: false
+    },
+    activo: false
 }
 
 const usuarioReducer = (state = initialState, payload) => {
@@ -17,8 +18,8 @@ const usuarioReducer = (state = initialState, payload) => {
     switch(payload.type){
         
         // Usuario ya logueado
-        case 'sig-in':
-            console.log('')
+        case 'sing-in':
+            console.log('Bienvenido usuario')
             return { ...state, usuario: payload.data, activo: true }
 
         // Usuario se va a loguear
@@ -56,7 +57,7 @@ function UsuarioProvider(props){
     const [login, loginAction] = useReducer(usuarioReducer , initialState)
 
     return(
-        <UsuarioContext.Provider value={{login, loginAction}}>
+        <UsuarioContext.Provider value={ [login, loginAction] }>
             {props.children}
         </UsuarioContext.Provider>
     )
