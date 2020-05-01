@@ -87,3 +87,49 @@ npx react-native link
 		]
 
 	npx react-native start --reset-cache
+
+
+# Generate apk for release: https://reactnative.dev/docs/signed-apk-android
+
+	1. Generar .keystore
+	keytool -genkey -v -keystore key.keystore -alias keylog -keyalg RSA -keysize 2048 -validity 30000
+
+	2. Copiar en : /android/app
+
+	3. Añadir en : /android/gradle.properties
+
+	MYAPP_UPLOAD_STORE_FILE=my-upload-key.keystore
+	MYAPP_UPLOAD_KEY_ALIAS=my-key-alias
+	MYAPP_UPLOAD_STORE_PASSWORD=*****
+	MYAPP_UPLOAD_KEY_PASSWORD=*****
+
+	4 modificar : android/app/build.gradle
+
+		android {
+		...
+		defaultConfig { ... }
+		signingConfigs {
+			release {
+				if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+					storeFile file(MYAPP_UPLOAD_STORE_FILE)
+					storePassword MYAPP_UPLOAD_STORE_PASSWORD
+					keyAlias MYAPP_UPLOAD_KEY_ALIAS
+					keyPassword MYAPP_UPLOAD_KEY_PASSWORD
+				}
+			}
+		}
+		buildTypes {
+			release {
+				...
+				signingConfig signingConfigs.release
+			}
+		}
+	}
+
+	4.a Generar AAB bundle (android/app/build/outputs/bundle/release/app.aab)
+		cd android
+		./gradlew bundleRelease
+		
+	4.b Generar APK release (android/app/build/outputs/apk/app-release.apk):
+		cd android
+		./gradlew assembleRelease
