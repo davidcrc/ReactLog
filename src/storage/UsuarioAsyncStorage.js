@@ -1,5 +1,9 @@
+/**
+ * Aqui se almacenaran los datos de l usuario en sesion
+ */
 import AsyncStorage from '@react-native-community/async-storage'
 
+// TODO: que hace este @usuario??
 const USUARIO_KEY = '@usuario:key'
 
 

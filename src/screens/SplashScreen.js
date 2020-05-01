@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 import React, { useContext, useEffect } from 'react';
 import { View, StatusBar } from 'react-native';
 
@@ -9,8 +12,11 @@ import {UsuarioContext} from '@context/UsuarioContext'
 
 export default function SplashScreen(props) {
 
+    const logo_splash = require('@recursos/images/foodapp.png')
     const [login, loginAction] = useContext(UsuarioContext)
 
+    // Este hook verifica, una sola vez (componentDidMount)
+    // si existe la sesion o no
     useEffect(() => {
         fetchSesion(loginAction)
     }, [])
@@ -20,6 +26,7 @@ export default function SplashScreen(props) {
         <View style={splashStyles.image} >
             <StatusBar translucent backgroundColor='rgba(0,0,0,0.2)' />
 
+            {/* Un logo pulsante que forma el splash */}
             <Animatable.Image 
                 animation="pulse"
                 easing="ease-out"
@@ -29,14 +36,14 @@ export default function SplashScreen(props) {
                     height: 200,
                     margin: 100,
                 }}
-                source={ require('@recursos/images/foodapp.png') }
+                source={ logo_splash }
             />
 
         </View>
     )
 
     /**
-     * 
+     * Aqui se verifica si existe o no una sesion
      */
     async function fetchSesion(loginAction){
 
@@ -47,7 +54,7 @@ export default function SplashScreen(props) {
         if(response == null){
             setTimeout( () => {
                 goToScreen('Login')
-            }, 3000)
+            }, 2500)
             return
         }
 
@@ -55,8 +62,9 @@ export default function SplashScreen(props) {
 
         setTimeout( () => {
             goToScreen('Principal')
-        }, 500)
+        }, 600)
     }
+
     /**
      * Redirige a la pantalla pasada en routName
      */

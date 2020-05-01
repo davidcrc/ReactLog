@@ -1,7 +1,7 @@
-import React, {Component, useState} from 'react';
-import { Text, View, StatusBar, Image, TouchableOpacity } from 'react-native';
+import React, {useState} from 'react';
+import { Text, View, StatusBar, TouchableOpacity, Alert } from 'react-native';
 
-import {mainStyles, loginStyles} from '@styles/styles'
+import {mainStyles} from '@styles/styles'
 import MyTextInput from '@components/MyTextInput'
 import ToolBar from '@components/ToolBar'
 import color from '@styles/Colors'
@@ -15,6 +15,9 @@ function goToScreen(props, routeName){
 
 export default function RecuperarPasswordScreen(props){
 
+    const [email, setEmail] = useState('')
+    const btn_image_back = require('@recursos/images/back.png')
+
     return(
 
         <ScrollView 
@@ -27,16 +30,18 @@ export default function RecuperarPasswordScreen(props){
             {/* Coloca una toolbar  */}
             <ToolBar titulo="Contraseña"
             onPressLeft={ () => goToScreen(props, 'Login') }
-            iconLeft={ require('@recursos/images/back.png') } />
+            iconLeft={ btn_image_back } />
             
-            <View style={[mainStyles.container, {padding: 50}]}>
+            <View style={[mainStyles.container, {padding: 30}]}>
                 
                 <Text style={ mainStyles.titleText}>Recuperar contraseña</Text>
                 
-                <MyTextInput keyboardType='email-address' placeholder='E-mail' image='user'/>
+                <MyTextInput keyboardType='email-address' placeholder='E-mail' image='envelope'
+                    value={email} onChangeText={ (email) => setEmail(email)}
+                />
                 
                 <View style={mainStyles.btnMain}>
-                    <TouchableOpacity onPress={ () => goToScreen(props, 'Login' ) } >
+                    <TouchableOpacity onPress={ () => recuperarPassword(props) } >
                         <Text style={ mainStyles.btntxt}>Recuperar</Text>
                     </TouchableOpacity>
                 </View>
@@ -45,4 +50,26 @@ export default function RecuperarPasswordScreen(props){
             
         </ScrollView>
     )
+
+    /** 
+     * enviara un correo si se encuentra registrado
+     * @param {*} props 
+     */
+    function recuperarPassword(props){
+        // TODO: Falta la validacion del campo e-mail
+        // console.log("recuperar "+ email)
+        Alert.alert(
+            "Recuperación",
+            "Si ud. se encuentra registrado, un correo ha sido enviado a "+ email + ', para su verificación.',
+            [
+                {
+                    text: "Ok", onPress: () => {
+
+                        goToScreen(props, 'Login' )
+                    }
+                },
+            ]
+        )
+
+    }
 }

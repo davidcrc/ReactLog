@@ -18,7 +18,8 @@ const mainStyles = StyleSheet.create({
 
     titleText: {
         fontSize: 28,
-        marginTop: 10,
+        marginTop: 0,
+        marginBottom : 10,
         color: color.BLUE,
         fontFamily: "Poppins-SemiBold"
     },
@@ -72,9 +73,15 @@ const splashStyles = StyleSheet.create({
 const loginStyles = StyleSheet.create({
 
     logo: {
-        paddingTop: 50,
-        alignItems: 'center',
+        paddingTop: 10,
+        paddingBottom: 20,
+        alignItems: 'center',        
     },
+    logo_image : {
+        height:150, 
+        width:150
+    }
+    
 })
 
 //Estilos para RegistroScreen

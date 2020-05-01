@@ -1,11 +1,15 @@
+/**
+ * Componente Boton
+ * Este se define deacuerdo a su prop transparent
+ */
 import React from 'react'
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import {mainStyles} from '@styles/styles'
 import color from '@styles/Colors'
 
 function MyButton(props){
 
-    // 
+    // Define un estilo de boton deacuerdo a los parametros pasados ...
     const sButton = props.transparent ? mainStyles.btnTransparent : mainStyles.btnMain
     const sText = props.transparent ? { color: color.BLUE } : null
 

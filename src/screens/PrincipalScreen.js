@@ -1,6 +1,9 @@
+/**
+ * Ventana principal despues del login
+ */
 import React, { useContext, useEffect } from 'react';
 import { Text, View, TouchableOpacity, StatusBar, Alert, BackHandler } from 'react-native';
-import { mainStyles } from '@styles/styles'
+// import { mainStyles } from '@styles/styles'
 import { UsuarioContext } from '@context/UsuarioContext'
 import { colors } from 'react-native-elements';
 import MyButton from '@components/MyButton'
@@ -26,6 +29,8 @@ export default function PrincipalScreen(props) {
 
     return (
         <View style={{ flex:1 , alignItems: 'center' }} >
+            
+            {/* Configurar un colo para la barra de estado */}
             <StatusBar 
                 backgroundColor={colors.BLUE} 
                 barStyle='dark-content'
@@ -36,10 +41,11 @@ export default function PrincipalScreen(props) {
                 Bienvenido { '\n' +login.usuario.nombre }
             </Text>
 
+            {/* Boton de cerrar sesion */}
             <MyButton 
-                    titulo='Cerrar sesion'
-                    onPress={()=> desconectarse()}
-                />
+                titulo='Cerrar sesion'
+                onPress={()=> desconectarse()}
+            />
         </View>
     )
 
@@ -48,7 +54,9 @@ export default function PrincipalScreen(props) {
         props.navigation.replace(routeName)
     }
 
-    // 
+    /**
+     * Aqui se desloguea utilizando un Alert
+     */
     function desconectarse(){
         
         Alert.alert(

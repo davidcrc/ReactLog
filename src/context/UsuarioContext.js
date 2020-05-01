@@ -1,3 +1,7 @@
+/**
+ * Context de react native
+ * utilizado para poder almacenar varibales que no sean muy cambiantes
+ */
 import React, {createContext, useReducer} from 'react';
 import { saveUsuario, deleteUsuario } from '@storage/UsuarioAsyncStorage'
 import Snackbar from 'react-native-snackbar';
@@ -25,6 +29,7 @@ const usuarioReducer = (state = initialState, payload) => {
         // Usuario se va a loguear
         case 'sign':
             // Aqui deberia colocar el API para saber si se pudo loguear o not
+
             saveUsuario(payload.data).then((msg) =>  {
                 console.log('usuario guardado')
             })
@@ -53,6 +58,10 @@ const usuarioReducer = (state = initialState, payload) => {
 
 const UsuarioContext = createContext(initialState)
 
+/**
+ * permite que los componentes que lo consumen se suscriban a los cambios del contexto.
+ * @param {*} props 
+ */
 function UsuarioProvider(props){
     
     const [login, loginAction] = useReducer(usuarioReducer , initialState)

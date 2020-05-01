@@ -1,3 +1,7 @@
+/**
+ * Aqui se colocan todas las vistas disponibles
+ * en forma de pila
+ */
 import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 
