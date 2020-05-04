@@ -59,6 +59,9 @@
 - 
 	npm install --save react-native-screens
 	
+- Para validar formularios
+	npm install formik yup --save
+
 al final realizar un link al proyecto
 
 npx react-native link

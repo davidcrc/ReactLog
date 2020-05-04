@@ -32,6 +32,14 @@ const mainStyles = StyleSheet.create({
         backgroundColor: color.BLUE,
         borderRadius: 60
     },
+    btnMainDisable: {
+        width: 250,
+        marginTop: 20,
+        marginBottom: 20,
+        alignItems: 'center',
+        backgroundColor: color.DISABLE_BUTTON,
+        borderRadius: 60
+    },
 
     btnTransparent: {
         backgroundColor: 'rgba(52, 52, 52, 0)',

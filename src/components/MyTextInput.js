@@ -14,10 +14,12 @@ export default function MyTextInput(props) {
   const image_show_pass = require('@recursos/images/ic_show_password.png');
   const image_hide_pass = require('@recursos/images/ic_hide_password.png')
 
+  const underline = (props.strError) ? {borderBottomWidth: 1} : {borderBottomWidth: 0}
+  
   return (
     <Input
       style={{ alignItems: 'center' }}
-      containerStyle={{ marginBottom: 15, borderBottomColor: color.LIGHTPRIMARYCOLOR, borderBottomWidth: 0 }}
+      containerStyle={[underline ,{ marginBottom: 15, borderBottomColor: color.LIGHTPRIMARYCOLOR }]}
       inputStyle={{
         fontSize: 16, paddingVertical: 10,
         paddingHorizontal: 8, marginTop: 10,

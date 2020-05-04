@@ -15,6 +15,7 @@ import MyTextInput from '@components/MyTextInput'
 import ToolBar from '@components/ToolBar'
 import color from '@styles/Colors'
 import { CheckBox, SocialIcon, Button } from 'react-native-elements'
+import { TapGestureHandler } from 'react-native-gesture-handler'
 
 function goToScreen(props, routeName) {
     props.navigation.navigate(routeName)
@@ -23,9 +24,21 @@ function goToScreen(props, routeName) {
 export default function RegistroScreen(props) {
 
     const [hidePassword, setHidePassword] = useState(true)
-    const [isSelected, setSelection] = useState(false);
+    const [isCheckSelected, setSelection] = useState(false);
 
     const btn_image_back = require('@recursos/images/back.png')
+
+    // Para almcenar las variables
+    const [Name, setName] = useState('')
+    const [LastName, setLastName] = useState('')
+    const [Email, setEmail] = useState('')
+    const [Pass, setPass] = useState('')
+
+    // Para almacenar las variables de rror
+    const [strName, setNameError] = useState('*')
+    const [strLasName, setLasNameError] = useState('*')
+    const [strEmail, setStringError] = useState('*')
+    const [strPass, setPassError] = useState('(*)')
 
     return (
         <ScrollView
@@ -43,18 +56,31 @@ export default function RegistroScreen(props) {
 
                 <Text style={mainStyles.titleText}> Crea tu Cuenta</Text>
 
-                <MyTextInput placeholder='Nombres' image='user' />
+                <MyTextInput placeholder='Nombres' image='user'
+                    value={Name} onChangeText={ (name) => handleChangeName(name)} 
+                    bolError={true} strError={strName} require 
+                />
 
-                <MyTextInput placeholder='Apellidos' image='user' />
+                <MyTextInput placeholder='Apellidos' image='user' 
+                    value={LastName} onChangeText={ (LastName) => handleChangeTLastName(LastName)} 
+                    bolError={true} strError={strLasName} require 
+                />
 
-                <MyTextInput keyboardType='email-address' placeholder='E-mail'
-                    image='envelope' />
+                <MyTextInput keyboardType='email-address' placeholder='E-mail' value={Email}
+                    image='envelope' 
+                    onChangeText={ (email) => handleChangeEmail(email)} 
+                    bolError={true} strError={strEmail} require
+                />
 
                 <MyTextInput keyboardType={null} placeholder='Contraseña'
                     onPress={() => setHidePassword(!hidePassword)}
                     keyboardType={null}
                     image='lock' bolGone={true}
                     secureTextEntry={hidePassword}
+                    value={Pass}
+                    bolError={true}
+                    strError={strPass}
+                    onChangeText={ (pass) => handleChangePass(pass)} 
                 />
                 
                 {/* Checkbox de Terminos y condiciones */}
@@ -62,18 +88,23 @@ export default function RegistroScreen(props) {
                     containerStyle={registroStyles.checkBox}
                     textStyle={{ color: color.BLUE }}
                     title='He leído y acepto los términos y condiciones'
-                    checked={isSelected}
-                    onPress={()=>setSelection(!isSelected)}
+                    checked={isCheckSelected}
+                    onPress={()=>setSelection(!isCheckSelected)}
                     checkedColor={color.BLUE}
                 />
 
                 {/* Boton de registro */}
-                <View style={mainStyles.btnMain}>
+                <View style={isCheckSelected ? mainStyles.btnMain : mainStyles.btnMainDisable }>
                     <TouchableOpacity onPress={() =>
-                        registrar(props) }>
-                        <Text style={mainStyles.btntxt}>Registrarse</Text>
+                        registrar(props)}
+                        disabled={!isCheckSelected} >
+                        <Text style={mainStyles.btntxt}> Registrarse </Text>
                     </TouchableOpacity>
+
                 </View>
+                
+                {/* Mostrar mensaje de rror  */}
+                <Text style={{ color: color.RED }}> aa  </Text>
 
                 {/* Sugerencia de inicio de sesion, si tienes cuenta */}
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
@@ -105,7 +136,86 @@ export default function RegistroScreen(props) {
     )
 
     function registrar(){
-        // VIEW: Aqui hacer la validacion de campos
+        // VIEW: Aqui hacer la validacion de campos, esten correctos 
+
         goToScreen(props, 'Login')
     }
+
+    function handleChangeEmail(email){
+        
+        console.log('et email: '+ email )
+        setEmail(email)
+        
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+        if (reg.test(email) === false) {
+            // console.log();
+            setStringError("Ingrese un email valido.")
+            return false;
+        }
+        else {
+            console.log("Email is correct");
+            setStringError("")
+
+        }
+    }
+
+
+    function handleChangePass(text){
+        console.log("in: "+ text)
+        setPass(text)
+
+        // 7 a 15 caracteres que contienen al menos un dígito numérico y un carácter especial
+        // let reg = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/
+
+        // De 6 a 17 caracteres que contienen solo caracteres, dígitos numéricos, guiones bajos y el primer carácter debe ser una letra
+        let reg = /^[A-Za-z]\w{5,18}$/;
+
+        if (reg.test(text) === false) {
+            console.log("no correct pass");
+            setPassError("Debe contener al menos 6 caracteres, la primera mayus .")
+            return false;
+        }
+        else {
+            console.log("Pass is correct");
+            setPassError("")
+
+        };
+    }
+
+    function handleChangeName(txt){
+        
+        console.log("el txt "+ txt)
+        setName(txt) 
+        
+        if ( txt == "" ) {
+            setNameError("Campo requerdio")
+            console.log("reqqqq " + txt)
+        }
+        else{
+            setNameError("")
+            console.log("ya no reqqqq")
+
+        }
+
+    }
+
+    function handleChangeTLastName(txt){
+        
+        console.log("el txt "+ txt)
+        setLastName(txt) 
+        
+        if ( txt == "" ) {
+            setLasNameError("Campo requerdio")
+            console.log("reqqqq " + txt)
+        }
+        else{
+            setLasNameError("")
+            console.log("ya no reqqqq")
+
+        }
+
+    }
+        
 }
+

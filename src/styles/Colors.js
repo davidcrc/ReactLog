@@ -16,4 +16,5 @@ export default {
     YELLOW1: '#FBC02D',
     YELLOW2: '#FFEB3B',
     SPLASH: '#f06f0c',
+    DISABLE_BUTTON: '#607D8B'
 };
