@@ -1,6 +1,6 @@
 /**
  * Ventana para el registro
- * TODO: FALTA LA VALIDACION DE LOS CAMPOS
+ * 
  */
 import React, { useState } from 'react'
 import {
@@ -8,14 +8,15 @@ import {
     View,
     TouchableOpacity,
     StatusBar,
-    ScrollView
+    ScrollView,
+    ActivityIndicator
 } from 'react-native'
 import { mainStyles, registroStyles } from '@styles/styles'
 import MyTextInput from '@components/MyTextInput'
 import ToolBar from '@components/ToolBar'
 import color from '@styles/Colors'
 import { CheckBox, SocialIcon, Button } from 'react-native-elements'
-import { TapGestureHandler } from 'react-native-gesture-handler'
+
 
 function goToScreen(props, routeName) {
     props.navigation.navigate(routeName)
@@ -39,6 +40,9 @@ export default function RegistroScreen(props) {
     const [strLasName, setLasNameError] = useState('*')
     const [strEmail, setStringError] = useState('*')
     const [strPass, setPassError] = useState('(*)')
+
+    // Variable de registro
+    const [strReg, setRegMsg] = useState('')
 
     return (
         <ScrollView
@@ -104,7 +108,7 @@ export default function RegistroScreen(props) {
                 </View>
                 
                 {/* Mostrar mensaje de rror  */}
-                <Text style={{ color: color.RED }}> aa  </Text>
+                <Text style={{ color: color.RED }}> {strReg}  </Text>
 
                 {/* Sugerencia de inicio de sesion, si tienes cuenta */}
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
@@ -137,8 +141,22 @@ export default function RegistroScreen(props) {
 
     function registrar(){
         // VIEW: Aqui hacer la validacion de campos, esten correctos 
+        if ( !strName && !strLasName && !strEmail && !strPass  ){
+            console.log("todo Ok")
+            setRegMsg("todo Ok")
 
-        goToScreen(props, 'Login')
+            // return (<ActivityIndicator size="large" color="#0000ff" />)
+            setTimeout( () => {
+                goToScreen(props, 'Login')
+                
+                
+            }, 800)
+        }
+        else{
+            console.log("algo sucedio")
+            setRegMsg("algo sucedio")
+            
+        }
     }
 
     function handleChangeEmail(email){

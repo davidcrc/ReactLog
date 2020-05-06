@@ -3,7 +3,7 @@
  */
 import AsyncStorage from '@react-native-community/async-storage'
 
-// TODO: que hace este @usuario??
+// VIEW: que hace este @usuario??
 const USUARIO_KEY = '@usuario:key'
 
 

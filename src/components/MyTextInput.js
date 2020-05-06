@@ -14,7 +14,7 @@ export default function MyTextInput(props) {
   const image_show_pass = require('@recursos/images/ic_show_password.png');
   const image_hide_pass = require('@recursos/images/ic_hide_password.png')
 
-  const underline = (props.strError) ? {borderBottomWidth: 1} : {borderBottomWidth: 0}
+  const underline = (props.strError) ? {borderBottomWidth: 0} : {borderBottomWidth: 0}
   
   return (
     <Input

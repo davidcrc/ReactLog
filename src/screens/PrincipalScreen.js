@@ -38,7 +38,7 @@ export default function PrincipalScreen(props) {
             />
 
             <Text style={{ textAlign: 'center', marginTop: 200, fontFamily: 'Poppins-Black' }}>
-                Bienvenido { '\n' +login.usuario.nombre }
+                Bienvenido { '\n' +login.usuario.email }
             </Text>
 
             {/* Boton de cerrar sesion */}

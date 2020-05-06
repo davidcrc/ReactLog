@@ -25,13 +25,20 @@ export default function LoginScreen(props){
     // ESTAS VARIABLES SON LAS QUE INICIALIZAN EL CONTEXT DEL USUARIO
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [nombre, setNombre] = useState('David')
+    const [nombre, setNombre] = useState()      //TODO: Esta variable no deberia enviarse
 
     // variables utilizadas para decir si 
     // el icon password esta oculto o visible (default oculto)
     const [hidePassword, setHidePassword] = useState(true)
 
     const logo = require('@recursos/images/foodapp.png')
+
+    // Variables de error
+    const [strEmail, setStringError] = useState()
+    const [strPass, setPassError] = useState()
+    const [confirm, setConfirm] = useState(false)
+
+
 
     return(
         <ScrollView 
@@ -53,20 +60,23 @@ export default function LoginScreen(props){
 
                 {/* Input para el E-mail */}
                 <MyTextInput keyboardType='email-address' placeholder='E-mail' image='user'
-                    value={email} onChangeText={ (email) => setEmail(email) } 
+                    value={email} onChangeText={ (email) => handleChangeEmail(email) } 
+                    bolError={true} strError={strEmail} require
                 />
 
                 {/* Input para la contraseña (bolError aun no valida los datos!!!) */}
                 <MyTextInput keyboardType={null} placeholder='Contraseña' image='lock' bolGone={true}
                     secureTextEntry={hidePassword} bolError={true}
                     onPress={() => setHidePassword(!hidePassword)}
-                    value={password} onChangeText={ (password) => setPassword(password) }
+                    value={password} onChangeText={ (password) => handleChangePass(password) } 
+                    bolError={true} strError={strPass} require
                 />
 
                 {/* Boton iniciar sesion */}
                 <MyButton 
                     titulo='Iniciar sesion'
                     onPress={()=> iniciarSesion()}
+                    disable={true}
                 />
 
                 {/* Boton de registro */}
@@ -74,6 +84,8 @@ export default function LoginScreen(props){
                     transparent={true}
                     titulo='Registrarse'
                     onPress={()=> goToScreen('Registro')}
+                    disable={true}
+
                 />
                 
                 {/* Ejemplo simple de boton */}
@@ -99,24 +111,26 @@ export default function LoginScreen(props){
 
     function iniciarSesion(){
 
-        // TODO: FALTA LA VALIDACION DE CAMPOS
-        // y la posterior rediccion...
-        if ( password <= 5 ) {
+
+        if (confirm)
+        {
+            console.log("Iniciar!!!")
+            loginAction({
+                type: 'sign', data : {
+                    email, password, nombre
+                }
+            })
+            goToScreenwithLogin('Principal')
+        }
+        else{
             Alert.alert(
-                "Password",
-                "Debe contener al menos 3 caracteres"
+                "Aviso",
+                "Revise los datos ingresados"
             )
             return
         }
-        
-        loginAction({
-            type: 'sign', data : {
-                email, password, nombre
-            }
-        })
 
         
-        goToScreenwithLogin('Principal')
     }
 
     function goToScreen(routeName){
@@ -126,5 +140,49 @@ export default function LoginScreen(props){
     
     function goToScreenwithLogin(routeName){
         props.navigation.replace(routeName)
+    }
+
+    function handleChangeEmail(email){
+        
+        console.log('et email: '+ email )
+        setEmail(email)
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+        if (reg.test(email) === false) {
+            // console.log();
+            setStringError("Ingrese un email valido.")
+            setConfirm(false)
+
+            return false;
+        }
+        else {
+            console.log("Email is correct");
+            setStringError("")
+            setConfirm(true)
+        }
+    }
+
+    function handleChangePass(text){
+        console.log("in: "+ text)
+        setPassword(text)
+
+        // 7 a 15 caracteres que contienen al menos un dígito numérico y un carácter especial
+        // let reg = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/
+
+        // De 6 a 17 caracteres que contienen solo caracteres, dígitos numéricos, guiones bajos y el primer carácter debe ser una letra
+        let reg = /^[A-Za-z]\w{5,18}$/;
+
+        if (reg.test(text) === false) {
+            console.log("no correct pass");
+            setPassError("Debe contener al menos 6 caracteres, la primera mayus .")
+            setConfirm(false)
+
+            return false;
+        }
+        else {
+            console.log("Pass is correct");
+            setPassError("")
+            setConfirm(true)
+        };
     }
 }

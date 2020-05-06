@@ -16,7 +16,7 @@ function MyButton(props){
     return (
         
         <TouchableOpacity style={ [sButton, props.style] }
-            onPress={ props.onPress } >
+            onPress={ props.onPress } disable={props.disable} >
             <Text style={ [mainStyles.btntxt , sText] } > {props.titulo} </Text>
         </TouchableOpacity>
         

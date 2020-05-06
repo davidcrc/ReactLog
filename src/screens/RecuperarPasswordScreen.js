@@ -16,6 +16,8 @@ function goToScreen(props, routeName){
 export default function RecuperarPasswordScreen(props){
 
     const [email, setEmail] = useState('')
+    const [strEmail, setStringError] = useState('(*)')
+
     const btn_image_back = require('@recursos/images/back.png')
 
     return(
@@ -37,11 +39,12 @@ export default function RecuperarPasswordScreen(props){
                 <Text style={ mainStyles.titleText}>Recuperar contraseña</Text>
                 
                 <MyTextInput keyboardType='email-address' placeholder='E-mail' image='envelope'
-                    value={email} onChangeText={ (email) => setEmail(email)}
+                    value={email} onChangeText={ (email) => handleChangeEmail(email)}
+                    bolError={true} strError={strEmail} require
                 />
                 
-                <View style={mainStyles.btnMain}>
-                    <TouchableOpacity onPress={ () => recuperarPassword(props) } >
+                <View style={!strEmail ? mainStyles.btnMain : mainStyles.btnMainDisable }>
+                    <TouchableOpacity onPress={ () => recuperarPassword(props) } disabled={strEmail} >
                         <Text style={ mainStyles.btntxt}>Recuperar</Text>
                     </TouchableOpacity>
                 </View>
@@ -56,7 +59,7 @@ export default function RecuperarPasswordScreen(props){
      * @param {*} props 
      */
     function recuperarPassword(props){
-        // TODO: Falta la validacion del campo e-mail
+        
         // console.log("recuperar "+ email)
         Alert.alert(
             "Recuperación",
@@ -71,5 +74,24 @@ export default function RecuperarPasswordScreen(props){
             ]
         )
 
+    }
+
+    function handleChangeEmail(email){
+        
+        console.log('et email: '+ email )
+        setEmail(email)
+        
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+        if (reg.test(email) === false) {
+            // console.log();
+            setStringError("Ingrese un email valido.")
+            return false;
+        }
+        else {
+            console.log("Email is correct");
+            setStringError("")
+
+        }
     }
 }
