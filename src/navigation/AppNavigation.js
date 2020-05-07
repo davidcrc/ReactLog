@@ -10,6 +10,7 @@ import LoginScreen from '@screens/LoginScreen'
 import PrincipalScreen from '@screens/PrincipalScreen'
 import RecuperarPasswordScreen from '@screens/RecuperarPasswordScreen'
 import RegistroScreen from '@screens/RegistroScreen'
+import Profile from '@screens/Profile'
 
 const AppNavigation = createStackNavigator({
 
@@ -40,6 +41,13 @@ const AppNavigation = createStackNavigator({
     },
     Registro: {
         screen: RegistroScreen,
+        navigationOptions: {
+            headerShown: false,
+        }
+    },
+
+    Profile: {
+        screen: Profile,
         navigationOptions: {
             headerShown: false,
         }
